@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Theme tokens ─────────────────────────────────────────── */
+:root {
+  /* Light mode: warm off-white bg, very dark text for elderly readability */
+  --bg: 248, 247, 244;
+  --fg: 15, 12, 10;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Dark amber for high contrast on light bg — WCAG AA+ (≈7:1) */
+  --gold: 100, 75, 0;
+}
+
+.dark {
+  --bg: 0, 0, 0;
+  --fg: 250, 249, 246;
+
+  /* Warm gold on dark backgrounds */
+  --gold: 212 175 55;
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+body {
+  margin: 0;
+  padding: 0;
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  font-style: normal;
+  /* Larger base font for elderly readability */
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* No italics anywhere — design calls for straight type only */
+* {
+  font-style: normal !important;
+}
+
+/* ── Utilities ────────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(var(--fg), 0.02);
+  backdrop-filter: blur(8px);
+}
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(var(--fg), 0.02); }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(var(--gold) / 0.25);
+  border-radius: 10px;
+}
+
+/* ── Devanagari — reset tracking ─────────────────────────── */
+/* Wide letter-spacing breaks the connecting शिरोरेखा bar.    */
+:lang(hi) * {
+  letter-spacing: 0 !important;
+}
+
+/* ── Prose — reader page ──────────────────────────────────── */
+.prose-osho {
+  font-family: var(--font-sans);
+  line-height: 2.0;
+  color: rgb(var(--fg) / 0.95);
+  font-size: 1.125rem;
+}
+
+@media (min-width: 768px) {
+  .prose-osho {
+    font-size: 1.25rem;
+  }
+}
+
+/* ── Mobile touch targets ────────────────────────────────── */
+@media (max-width: 640px) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
